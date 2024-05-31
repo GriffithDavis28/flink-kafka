@@ -16,7 +16,7 @@ public class SocketWindowWordCount {
     public static void main(String[] args) throws Exception{
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.enableCheckpointing(3000);
+        env.enableCheckpointing(8000);
         //Creating a data stream of type string
         DataStream<String> text =  env.socketTextStream("localhost", 9000, "\n");
 
@@ -28,12 +28,13 @@ public class SocketWindowWordCount {
         .sum(1).map(a -> a.f0 + " " + a.f1);
 
         StreamingFileSink<String> sinkExample = StreamingFileSink
-                .forRowFormat(new Path("file:///home/davisgriffith/Documents/test1.txt"), new SimpleStringEncoder())
+                .forRowFormat(new Path("file:///home/davisgriffith/Analytics/project/test.txt"), new SimpleStringEncoder())
                         .build();
 
         //Print results
-//        windowCounts.print().setParallelism(1);
-        //windowCounts.writeAsText("~/home/Documents/test1.txt", FileSystem.WriteMode.NO_OVERWRITE).setParallelism(1);
+        windowCounts.print().setParallelism(1);
+        windowCounts.writeAsText("testing/test1.txt", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
+        windowCounts.print();
         windowCounts.addSink(sinkExample);
         env.execute("Socket Window WordCount");
     }
