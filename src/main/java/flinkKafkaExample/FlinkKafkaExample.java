@@ -12,6 +12,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
+
+import javax.xml.crypto.Data;
 import java.util.Properties;
 
 public class FlinkKafkaExample {
@@ -34,6 +36,8 @@ public class FlinkKafkaExample {
 
             DataStream<String> data = environment.addSource(consumer);
 
+            DataStream<String> dataFromFile = environment.readTextFile("file:///home/griffith/IdeaProjects/flink/data.txt");
+
             DataStream<String> filteredData = data.filter(value-> true);
 
             StreamingFileSink<String> sink = StreamingFileSink
@@ -42,12 +46,14 @@ public class FlinkKafkaExample {
 
             FlinkKafkaProducer<String> producer = createStringProducer(outputTopic, address);
 
-            data.addSink(producer);
+            //data.addSink(producer);
 
-            data.addSink(sink);
+            dataFromFile.addSink(producer);
 
-            data.writeAsText("///home/griffith/IdeaProjects/flink/consumedData.txt", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
-            filteredData.writeAsText("///home/griffith/IdeaProjects/flink/filteredData.txt", FileSystem.WriteMode.OVERWRITE).setParallelism(1);
+            //data.addSink(sink);
+
+            data.writeAsText("///home/griffith/IdeaProjects/flink/consumedData.txt", FileSystem.WriteMode.NO_OVERWRITE).setParallelism(1);
+            dataFromFile.writeAsText("///home/griffith/IdeaProjects/flink/fileData.txt", FileSystem.WriteMode.NO_OVERWRITE).setParallelism(1);
             environment.execute("example");
         }catch (Exception e){
             e.printStackTrace();
@@ -66,21 +72,6 @@ public class FlinkKafkaExample {
 
     public static FlinkKafkaProducer<String> createStringProducer(String topic, String kafkaAddress){
         return  new FlinkKafkaProducer<>(kafkaAddress, topic, new SimpleStringSchema());
-    }
-
-    public static String extractfield(String json){
-        try{
-            ObjectMapper obj = new ObjectMapper();
-            JsonNode node = obj.readTree(json);
-
-            if(node.has("name")){
-                return  node.get("name").asText();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-        return null;
     }
 
 
