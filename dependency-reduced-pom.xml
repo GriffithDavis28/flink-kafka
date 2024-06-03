@@ -104,13 +104,13 @@
         <dependency>
           <groupId>org.apache.flink</groupId>
           <artifactId>flink-java</artifactId>
-          <version>1.6.1</version>
+          <version>1.16.1</version>
           <scope>compile</scope>
         </dependency>
         <dependency>
           <groupId>org.apache.flink</groupId>
-          <artifactId>flink-streaming-java_2.11</artifactId>
-          <version>1.6.1</version>
+          <artifactId>flink-streaming-java</artifactId>
+          <version>1.16.1</version>
           <scope>compile</scope>
         </dependency>
       </dependencies>
@@ -130,15 +130,21 @@
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.7</version>
-      <scope>runtime</scope>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.32</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.30</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <properties>
     <java.version>1.8</java.version>
     <scala.binary.version>2.11</scala.binary.version>
-    <flink.version>1.6.1</flink.version>
+    <flink.version>1.16.1</flink.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>${java.version}</maven.compiler.target>

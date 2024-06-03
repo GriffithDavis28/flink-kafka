@@ -1,0 +1,18 @@
+hello
+{"name":"John","age":30,"city":"New York","job":"Engineer"}
+{"name":"John","age":30,"city":"New York","job":"Engineer"}
+	{"name":"John","age":30,"city":"New York","job":"Engineer"}
+
+{"name":"John","age":30,"city":"New York","job":"Engineer"}
+{"name":"John","age":30,"city":"New York","job":"Engineer"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name": "Bob", "email": "bob@example.com", "age": 35, "city": "Los Angeles", "country": "USA"}
+{"name":"griffith", age:10, "email":"random@gmail.com"}
+gmail.com"}
+{name:"griffith", age:10, email:"random@gmail.com"}
+{name:"griffith", age:10, email:"random@gmail.com"}
+{name:"griffith", age:10, email:"random@gmail.com", city:"randomCity"}

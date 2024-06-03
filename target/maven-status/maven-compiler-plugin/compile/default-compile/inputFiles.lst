@@ -1,6 +1,6 @@
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/myflink/CustomFlatMap.java
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/myflink/SocketWindowWordCount.java
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/myflink/BatchJob.java
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/myflink/StreamingJob.java
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/flinkKafkaExample/FlinkKafkaExample.java
-/home/davisgriffith/Analytics/project/my-flink-project/src/main/java/flinkKafkaExample/Capitalizer.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/myflink/SocketWindowWordCount.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/flinkKafkaExample/FlinkKafkaExample.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/myflink/StreamingJob.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/myflink/BatchJob.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/myflink/CustomFlatMap.java
+/home/davisgriffith/Analytics/project/flink/flink/src/main/java/flinkKafkaExample/JsonConversion.java
