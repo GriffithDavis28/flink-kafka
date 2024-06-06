@@ -3,4 +3,5 @@ myflink/StreamingJob.class
 myflink/CustomFlatMap.class
 myflink/SocketWindowWordCount.class
 flinkKafkaExample/FlinkKafkaExample.class
+flinkKafkaExample/FlinkKafkaExample$1.class
 myflink/BatchJob.class

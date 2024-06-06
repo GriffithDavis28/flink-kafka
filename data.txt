@@ -1,8 +1,160 @@
-[
-    {"name": "Alice Johnson", "email": "alice.johnson@example.com", "age": 28, "city": "New York"},
-    {"name": "Bob Smith", "email": "bob.smith@example.com", "age": 35, "city": "Los Angeles"},
-    {"name": "Charlie Brown", "email": "charlie.brown@example.com", "age": 40, "city": "Chicago"},
-    {"name": "David Wilson", "email": "david.wilson@example.com", "age": 22, "city": "Houston"},
-    {"name": "Eva Martinez", "email": "eva.martinez@example.com", "age": 30, "city": "Phoenix"}
-]
+import java.util.List;
+
+public class JobApplication {
+    private String cdc_pk;
+    private String cdc_oid;
+    private ObjectId _id;
+    private String applicationId;
+    private List<Applied> applied;
+    private String applyTransactionId;
+    private AryaScore aryaScore;
+    private String atsId;
+    private Object bulkUpdateLock;
+    private String consent;
+    private Object consentDate;
+    private String createdDate;
+    private Object crmRecommended;
+    private Object dismissReasons;
+    private String documentUpdatedDate;
+    private String firstSourceChannel;
+    private HiringStatus hiringStatus;
+    private List<Object> incompleteApplied;
+    private Object interviewSchedule;
+    private Object isConfidential;
+    private Object isVerified;
+    private String jobCategory;
+    private String jobId;
+    private List<String> jobSeekerSource;
+    private String jobTitle;
+    private String lastSourceChannel;
+    private String leadStatus;
+    private Object mlLanguage;
+    private String parent;
+    private Object recommendationSeenBy;
+    private Object recommendationWidgetSoucre;
+    private String refNum;
+    private Object seen;
+    private Object source;
+    private Object sourceTopic;
+    private List<Object> sourced;
+    private String status;
+    private int statusPriority;
+    private List<Object> subscribed;
+    private List<TrafficSource> trafficSourceList;
+    private String updatedDate;
+    private String userId;
+    private Object userType;
+    private List<Viewed> viewed;
+    private String cdc_modifiedon;
+    private String cdc_operation;
+    private Object updatedOn;
+
+    // Getters and setters
+}
+
+class Id {
+    private String oid;
+
+    // Getters and setters
+}
+
+class Applied {
+    private String applicationId;
+    private String atsId;
+    private String dateCreated;
+    private String email;
+    private String fieldID;
+    private Object isCareerSite;
+    private Object isRejected;
+    private String jobCategory;
+    private String jobLocation;
+    private String jobSeqNo;
+    private String jobTitle;
+    private Object locale;
+    private String siteType;
+    private String source;
+    private List<TrafficSource> trafficSourceList;
+    private Object uid;
+    private String updatedDate;
+
+    // Getters and setters
+}
+
+class AryaScore {
+    private String candidateScore;
+    private String createdDate;
+    private double experienceScore;
+    private Object fit;
+    private Object fitValue;
+    private Object goodToHaveSkillScore;
+    private Object jobSkillsCount;
+    private int locationDistance;
+    private int locationScore;
+    private String md5Check;
+    private Object mustToHaveSkillScore;
+    private double score;
+    private Object scoredBy;
+    private double skillsScore;
+    private String source;
+    private double titleScore;
+    private Object uid;
+    private String updatedDate;
+
+    // Getters and setters
+}
+
+class TrafficSource {
+    private List<String> activityTypes;
+    private String createdDate;
+    private String rawUrl;
+    private String referralType;
+    private String sourceFullname;
+    private String sourceShortName;
+    private String utmCampaign;
+    private String utmMedium;
+    
+    // Getters and setters
+}
+
+class HiringStatus {
+    private Object atsValue;
+    private Object disposition;
+    private Object hiringStatusCode;
+    private String hiringStepCode;
+    private int hsPriority;
+    private Object isRejected;
+    private String previousHiringStatusCode;
+    private String previousHiringStepCode;
+    private String previousRejectionReason;
+    private String previousRejectionReasonId;
+    private Object previousStep;
+    private String previousValue;
+    private Object previousWorkFlowStepId;
+    private Object recruiterUserId;
+    private Object rejectCode;
+    private String rejectionReason;
+    private String rejectionReasonId;
+    private String step;
+    private String updatedDate;
+    private String value;
+    private String workFlowStepId;
+
+    // Getters and setters
+}
+
+class Viewed {
+    private String dateCreated;
+    private String fieldID;
+    private String jobCategory;
+    private String jobLocation;
+    private String jobSeqNo;
+    private String jobTitle;
+    private Object locale;
+    private String siteType;
+    private Object source;
+    private List<TrafficSource> trafficSourceList;
+    private String updatedDate;
+
+    // Getters and setters
+}
 

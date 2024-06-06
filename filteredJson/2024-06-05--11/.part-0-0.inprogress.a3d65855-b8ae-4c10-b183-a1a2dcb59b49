@@ -1,0 +1,20 @@
+{"name":"Alice Johnson","address_state":"California","address_zip":"90001","email":"alice.johnson@example.com","address_city":"Los Angeles"}
+{"name":"Bob Smith","address_state":"Illinois","address_zip":"60601","email":"bob.smith@example.com","address_city":"Chicago"}
+{"name":"Charlie Brown","address_state":"Texas","address_zip":"77001","email":"charlie.brown@example.com","address_city":"Houston"}
+{"name":"David Wilson","address_state":"Arizona","address_zip":"85001","email":"david.wilson@example.com","address_city":"Phoenix"}
+{"name":"Eva Martinez","address_state":"Washington","address_zip":"98101","email":"eva.martinez@example.com","address_city":"Seattle"}
+{"name":"Fiona Green","address_state":"California","address_zip":"94101","email":"fiona.green@example.com","address_city":"San Francisco"}
+{"name":"George White","address_state":"Texas","address_zip":"78701","email":"george.white@example.com","address_city":"Austin"}
+{"name":"Hannah Black","address_state":"Colorado","address_zip":"80201","email":"hannah.black@example.com","address_city":"Denver"}
+{"name":"Ivy Blue","address_state":"Florida","address_zip":"33101","email":"ivy.blue@example.com","address_city":"Miami"}
+{"name":"Jack Grey","address_state":"Massachusetts","address_zip":"02101","email":"jack.grey@example.com","address_city":"Boston"}
+{"name":"Karen Red","address_state":"Nevada","address_zip":"89101","email":"karen.red@example.com","address_city":"Las Vegas"}
+{"name":"Leo Yellow","address_state":"California","address_zip":"92101","email":"leo.yellow@example.com","address_city":"San Diego"}
+{"name":"Mike Orange","address_state":"Pennsylvania","address_zip":"19101","email":"mike.orange@example.com","address_city":"Philadelphia"}
+{"name":"Nancy Purple","address_state":"Texas","address_zip":"75201","email":"nancy.purple@example.com","address_city":"Dallas"}
+{"name":"Oscar Green","address_state":"California","address_zip":"95101","email":"oscar.green@example.com","address_city":"San Jose"}
+{"name":"Paul White","address_state":"Ohio","address_zip":"43201","email":"paul.white@example.com","address_city":"Columbus"}
+{"name":"Quincy Brown","address_state":"North Carolina","address_zip":"28201","email":"quincy.brown@example.com","address_city":"Charlotte"}
+{"name":"Rachel Black","address_state":"Indiana","address_zip":"46201","email":"rachel.black@example.com","address_city":"Indianapolis"}
+{"name":"Steve Blue","address_state":"Texas","address_zip":"76101","email":"steve.blue@example.com","address_city":"Fort Worth"}
+{"name":"Tom Red","address_state":"Washington","address_zip":"98101","email":"tom.red@example.com","address_city":"Seattle"}

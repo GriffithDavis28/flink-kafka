@@ -1,12 +1,13 @@
 package flinkKafkaExample;
 
-import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.runtime.state.filesystem.FsStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.SideOutputDataStream;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.sink.filesystem.StreamingFileSink;
 import org.apache.flink.streaming.api.functions.sink.filesystem.bucketassigners.DateTimeBucketAssigner;
@@ -14,7 +15,6 @@ import org.apache.flink.streaming.api.functions.sink.filesystem.rollingpolicies.
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer;
 import org.apache.flink.util.OutputTag;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ import java.util.Properties;
 public class FlinkKafkaExample {
 
     private static final Logger logger = LoggerFactory.getLogger(FlinkKafkaExample.class);
-    public static OutputTag<String> faultOutputTag =  new OutputTag<String>("fault-output"){};
+    public static OutputTag<String> faultOutputTag =  new OutputTag<String>("side-output"){};
 
     public static void main(String[] args) {
 
@@ -37,6 +37,7 @@ public class FlinkKafkaExample {
             }
 
             Properties config = new Properties();
+            // Load configuration from file
             try (InputStream input = new FileInputStream(args[0])) {
                 logger.info("Loading configuration file: {}", args[0]);
                 config.load(input);
@@ -44,7 +45,8 @@ public class FlinkKafkaExample {
 
             // Assign properties from the configuration file
             String inputTopic = config.getProperty("inputTopic");
-            String outputTopic = config.getProperty("outputTopic");
+            String successTopic = config.getProperty("successTopic");
+            String failureTopic = config.getProperty("failureTopic");
             String consumerGroup = config.getProperty("consumerGroup");
             String kafkaAddress = config.getProperty("kafkaAddress");
             String checkpoints = config.getProperty("checkpointDirectory");
@@ -60,7 +62,7 @@ public class FlinkKafkaExample {
             final StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
 
             // Enable checkpoints every 5 seconds
-            environment.enableCheckpointing(5000);
+            environment.enableCheckpointing(10000);
 
             // Ensure checkpoints complete at least once
             environment.getCheckpointConfig().setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE);
@@ -77,25 +79,14 @@ public class FlinkKafkaExample {
             // Read data from a file
             DataStream<String> dataFromFile = environment.readTextFile(fileInput);
 
-            // Filtering incoming data to get specific data
-            DataStream<String> filteredData = dataFromFile.filter(value -> {
-                try {
-                    logger.info("Incoming data: {}", value);
+            // Process data with a custom function to filter and tag
+            SingleOutputStreamOperator<String> filteredStream = data.process(new JsonConversion());
 
-                    JSONObject json = new JSONObject(value);
-                    if (json.has("name") && json.has("")) {
-                        logger.info("Filtered data: {}", json);
-                        System.out.println(json);
-                        return true;
-                    }
-                } catch (Exception e) {
-                    logger.error("Error while filtering data: {}", value, e);
-                }
-                return false;
-            });
+            // Extract side output for error data
+            SideOutputDataStream<String> errorStream = filteredStream.getSideOutput(faultOutputTag);
 
             // Set up StreamingFileSink to write filtered data to a file
-            StreamingFileSink<String> sink = StreamingFileSink
+            StreamingFileSink<String> validDataSink = StreamingFileSink
                     .forRowFormat(new Path(filteredDataOutput), new SimpleStringEncoder<String>("UTF-8"))
                     .withBucketAssigner(new DateTimeBucketAssigner<>())
                     .withRollingPolicy(
@@ -106,14 +97,35 @@ public class FlinkKafkaExample {
                     )
                     .build();
 
+            // Set up StreamingFileSink to write invalid data to a file
+            StreamingFileSink<String> invalidDataSink = StreamingFileSink
+                    .forRowFormat(new Path(errorPath), new SimpleStringEncoder<String>("UTF-8"))
+                    .withBucketAssigner(new DateTimeBucketAssigner<>())
+                    .withRollingPolicy(
+                            DefaultRollingPolicy.builder()
+                                    .withInactivityInterval(Duration.ofMinutes(5))
+                                    .withRolloverInterval(Duration.ofMinutes(2))
+                                    .build()
+                    )
+                    .build();
+
             // Add sink to the filtered data
-            filteredData.addSink(sink);
+            filteredStream.addSink(validDataSink);
 
-            // Create a Kafka producer
-            FlinkKafkaProducer<String> producer = createStringProducer(outputTopic, kafkaAddress);
+            // Add sink to the error data
+            errorStream.addSink(invalidDataSink);
 
-            // Add Kafka producer sink
-            filteredData.addSink(producer);
+            // Create a Kafka producer for valid data
+            FlinkKafkaProducer<String> successProducer = createStringProducer(successTopic, kafkaAddress);
+
+            // Create a Kafka producer for invalid data
+            FlinkKafkaProducer<String> failureProducer = createStringProducer(failureTopic, kafkaAddress);
+
+            // Add Kafka producer sink for valid data
+            filteredStream.addSink(successProducer);
+
+            // Add Kafka producer sink for invalid data
+            errorStream.addSink(failureProducer);
 
             // Execute the Flink job
             environment.execute("Flink Kafka Example");

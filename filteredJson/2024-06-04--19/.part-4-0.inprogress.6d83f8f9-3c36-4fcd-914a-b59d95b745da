@@ -1,0 +1,3 @@
+{"name":"Alice Johnson","address_state":"California","address_zip":"90001","email":"alice.johnson@example.com","address_city":"Los Angeles"}
+{"name":"Bob Smith","address_state":"Illinois","address_zip":"60601","email":"bob.smith@example.com","address_city":"Chicago"}
+{"name":"Charlie Brown","address_state":"Texas","address_zip":"77001","email":"charlie.brown@example.com","address_city":"Houston"}
