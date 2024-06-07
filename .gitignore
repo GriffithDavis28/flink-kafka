@@ -1,5 +1,6 @@
 checkpoints/
 logs/
 filterJson/
+POJOClasses/
 
 *.txt

@@ -1,7 +1,14 @@
 flinkKafkaExample/JsonConversion.class
+flinkKafkaExample/POJOClasses/AryaScore.class
 myflink/StreamingJob.class
+flinkKafkaExample/ValidJson.class
+flinkKafkaExample/POJOClasses/Viewed.class
+flinkKafkaExample/POJOClasses/HiringStatus.class
 myflink/CustomFlatMap.class
 myflink/SocketWindowWordCount.class
+flinkKafkaExample/POJOClasses/Application.class
+flinkKafkaExample/POJOClasses/JobApplication.class
 flinkKafkaExample/FlinkKafkaExample.class
 flinkKafkaExample/FlinkKafkaExample$1.class
+flinkKafkaExample/POJOClasses/TrafficSource.class
 myflink/BatchJob.class
