@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ValidJson {
@@ -13,19 +14,25 @@ public class ValidJson {
     public static JSONObject validJson(String event) throws ParseException {
 
         JSONObject json = new JSONObject(event);
-        if (json.has("date")) {
-
+        if (json.has("date")){
             JSONObject filteredJson = new JSONObject();
-            try{
+            if(json.getString("date").isEmpty())
+            {
+                LocalDateTime date = LocalDateTime.now();
+                filteredJson.put("date", date);
+                try{
+                    Long epochSeconds = parseDate(filteredJson.getString("date")).getTime() / 1000;
+                    System.out.println(epochSeconds);
+                    filteredJson.put("date", epochSeconds);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }else {
                 filteredJson.put("date", json.getString("date"));
                 Long epochSeconds = parseDate(filteredJson.getString("date")).getTime() / 1000;
                 System.out.println(epochSeconds);
                 filteredJson.put("date", epochSeconds);
-            }catch (Exception e){
-                e.printStackTrace();
             }
-
-
 //            filteredJson.put("updatedDate", json.getString("updatedDate"));
 //            parseDate(filteredJson.getString("updatedDate"));
 //
